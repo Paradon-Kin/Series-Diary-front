@@ -103,12 +103,10 @@ const handleAddSeries = async (e) => {
   }
 
   const handleRate = async (seriesId, currentTitle) => {
-    // 🚨 เปลี่ยนข้อความเป็น 1-10
     const rating = prompt(`ให้คะแนนเรื่อง "${currentTitle}" เท่าไหร่ดีครับ? (1-10 คะแนน)`);
     if (!rating) return;
     
     const score = parseFloat(rating);
-    // 🚨 เปลี่ยนเงื่อนไขเช็กเป็นห้ามเกิน 10
     if (isNaN(score) || score < 1 || score > 10) {
       alert("กรุณาให้คะแนนเป็นตัวเลขระหว่าง 1 ถึง 10 ครับ");
       return;
@@ -130,7 +128,6 @@ const handleAddSeries = async (e) => {
   }
 
   const handleDelete = async (seriesId, title) => {
-  // ถามเพื่อยืนยันก่อนลบ (ป้องกันมือลั่น)
   if (!window.confirm(`คุณแน่ใจใช่ไหมว่าจะลบ "${title}" ออกจากไดอารี่?`)) return;
 
   try {
@@ -140,7 +137,7 @@ const handleAddSeries = async (e) => {
     });
 
     alert('ลบเรียบร้อยแล้วครับ');
-    fetchSeries(); // รีเฟรชรายการใหม่
+    fetchSeries(); 
   } catch (error) {
     alert('ไม่สามารถลบได้ กรุณาลองใหม่');
   }
@@ -166,7 +163,6 @@ const finishedList = validHistory.filter(
 
   return (
     <div className="container">
-      {/* 🌟 อัปเดตส่วนหัวใหม่ เอาปุ่ม Logout ไปไว้มุมขวา */}
       <div className="header-top">
         <h1 className="page-title">🍿 Series Diary</h1>
         <button onClick={handleLogout} className="btn-logout">
@@ -175,8 +171,6 @@ const finishedList = validHistory.filter(
       </div>
 
       <div className="dashboard-grid">
-        
-        {/* ฝั่งซ้าย: ฟอร์มเพิ่มซีรีส์ */}
         <div className="card">
           <h3 className="card-title">➕ เพิ่มซีรีส์ใหม่</h3>
           <form onSubmit={handleAddSeries}>
@@ -217,10 +211,7 @@ const finishedList = validHistory.filter(
           </form>
         </div>
 
-        {/* ฝั่งขวา: แบ่งเป็น 2 กล่อง (ดูค้างไว้ & ดูจบแล้ว) */}
         <div className="history-column">
-          
-          {/* กล่องที่ 1: ดูค้างไว้ */}
           <div className="card highlight-card">
             <h3 className="card-title"><PiClockCountdownFill /> ดูค้างไว้</h3>
             {watchingList.length === 0 ? <p style={{ color: '#7f8c8d' }}>ไม่มีซีรีส์ที่ดูค้างไว้</p> : (
@@ -237,7 +228,6 @@ const finishedList = validHistory.filter(
             )}
           </div>
 
-          {/* กล่องที่ 2: ดูจบแล้ว 🎉 */}
           <div className="card finished-card">
             <h3 className="card-title"><AiFillCarryOut /> ดูจบแล้ว</h3>
             {finishedList.length === 0 ? <p style={{ color: '#7f8c8d' }}>ยังไม่มีซีรีส์ที่ดูจบ</p> : (
@@ -256,13 +246,11 @@ const finishedList = validHistory.filter(
         </div>
       </div>
 
-      {/* ส่วนล่าง: รายการซีรีส์ทั้งหมด */}
       <h3 className="card-title" style={{ marginTop: '40px' }}>📺 คลังซีรีส์ทั้งหมดในระบบ</h3>
       <div className="series-grid">
         {seriesList.map((series) => (
           <div key={series.ID} className="series-card">
             
-            {/* 🌟 แสดงรูปภาพหน้าปก */}
             {series.CoverURL ? (
               <img src={series.CoverURL} alt={series.Title} className="series-cover" />
             ) : (
