@@ -55,6 +55,3 @@ The application is configured to make API calls to `http://localhost:8080`. Plea
 npm run dev
 ```
 Open your browser and navigate to `http://localhost:5173` to start using the app!
-
----
-Developed by **Paradon Saelee** as part of a Full-Stack development portfolio.
